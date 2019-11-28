@@ -14,11 +14,17 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String vcode = null
+
 WebUI.openBrowser('')
 
 WebUI.navigateToUrl(GlobalVariable.prod)
 
+WebUI.maximizeWindow()
+
 WebUI.click(findTestObject('page_signup_wizard/link_Dont_have_an_account_Sign_Up'))
+
+WebUI.delay(5)
 
 WebUI.waitForElementVisible(findTestObject('page_signup_wizard/input_email'), 30)
 
@@ -26,7 +32,9 @@ WebUI.delay(5)
 
 dateS = CustomKeywords.'customKeywords.utilities.getDateString'()
 
-signup_email = ('automation_qa_' + dateS) + '@mailinator.com'
+signup_email = (('automation_qa_' + dateS) + '@mailinator.com')
+
+WebUI.comment('Sign up email::: ') + signup_email 
 
 WebUI.setText(findTestObject('page_signup_wizard/input_email'), signup_email)
 
@@ -50,9 +58,61 @@ WebUI.click(findTestObject('page_signup_wizard/button_Finish'))
 
 WebUI.delay(20)
 
-WebUI.verifyElementNotVisible(findTestObject('page_signup_wizard/label_Sign Up failed'))
+WebUI.verifyElementNotPresent(findTestObject('page_signup_wizard/label_Sign Up failed'), 0)
 
-WebUI.delay(20)
+WebUI.click(findTestObject('page_welcome_wizard/button_Next'))
 
-WebUI.closeBrowser()
+WebUI.waitForElementVisible(findTestObject('page_welcome_wizard/input_verification_code'), 30)
+
+WebUI.delay(5)
+
+WebUI.navigateToUrl('https://www.mailinator.com/')
+
+WebUI.delay(10)
+
+WebUI.setText(findTestObject('mailinator/input_email'), signup_email)
+
+WebUI.sendKeys(findTestObject('mailinator/input_email'), Keys.chord(Keys.ENTER))
+
+WebUI.delay(10)
+
+WebUI.click(findTestObject('mailinator/link_email'))
+
+WebUI.delay(5)
+
+WebUI.switchToFrame(findTestObject('mailinator/msg_body'), 5)
+
+WebUI.delay(5)
+
+vcode = WebUI.getText(findTestObject('mailinator/label_vcode'))
+
+vcode1 = vcode.replace('Verification Code:', '')
+
+WebUI.switchToDefaultContent()
+
+WebUI.delay(5)
+
+WebUI.navigateToUrl('https://dashboard.myinterview.com/admin/')
+
+WebUI.delay(5)
+
+WebUI.click(findTestObject('page_welcome_wizard/button_Next'))
+
+WebUI.delay(3)
+
+WebUI.setText(findTestObject('page_welcome_wizard/input_verification_code'), vcode1)
+
+WebUI.sendKeys(findTestObject('page_welcome_wizard/input_verification_code'), Keys.chord(Keys.ENTER))
+
+WebUI.delay(10)
+
+WebUI.click(findTestObject('page_welcome_wizard/section_Sales_Question'))
+
+WebUI.click(findTestObject('page_welcome_wizard/button_create_my_first_interview'))
+
+WebUI.delay(10)
+
+WebUI.verifyElementText(findTestObject('label_jobTitle'), 'Sales Interview')
+
+WebUI.takeScreenshot()
 
