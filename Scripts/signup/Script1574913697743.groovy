@@ -24,7 +24,7 @@ WebUI.maximizeWindow()
 
 WebUI.click(findTestObject('page_signup_wizard/link_Dont_have_an_account_Sign_Up'))
 
-WebUI.delay(5)
+WebUI.delay(6)
 
 WebUI.waitForElementVisible(findTestObject('page_signup_wizard/input_email'), 30)
 
@@ -34,7 +34,7 @@ dateS = CustomKeywords.'customKeywords.utilities.getDateString'()
 
 signup_email = (('automation_qa_' + dateS) + '@mailinator.com')
 
-WebUI.comment('Sign up email::: ') + signup_email 
+WebUI.comment('Sign up email::: ') + signup_email
 
 WebUI.setText(findTestObject('page_signup_wizard/input_email'), signup_email)
 
