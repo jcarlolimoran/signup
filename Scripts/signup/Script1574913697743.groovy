@@ -24,7 +24,7 @@ WebUI.maximizeWindow()
 
 WebUI.click(findTestObject('page_signup_wizard/link_Dont_have_an_account_Sign_Up'))
 
-WebUI.delay(6)
+WebUI.delay(7)
 
 WebUI.waitForElementVisible(findTestObject('page_signup_wizard/input_email'), 30)
 
