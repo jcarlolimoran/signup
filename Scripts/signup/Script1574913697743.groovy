@@ -42,7 +42,7 @@ WebUI.click(findTestObject('page_signup_wizard/select_why_are_you_signing_up'))
 
 WebUI.click(findTestObject('page_signup_wizard/itemSelect_I am an Employer'))
 
-WebUI.setEncryptedText(findTestObject('page_signup_wizard/input_password'), 'kHwl2Dr6jYzBGMCBnr6EGA==')
+WebUI.setEncryptedText(findTestObject('page_signup_wizard/input_password'), '+xoIk16sSBQXH9m06zjgiA==')
 
 WebUI.click(findTestObject('page_signup_wizard/button_Next'))
 
