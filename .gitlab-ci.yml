@@ -6,6 +6,7 @@ Test:
   script:
     - katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/signup_monitoring"
   artifacts:
+    when: always
     name: "$CI_COMMIT_REF_NAME"
     paths:
       - report/
